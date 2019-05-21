@@ -51,6 +51,11 @@ namespace PubLinkApp
                 }
                 Console.WriteLine();
             }
+
+            Console.WriteLine("Mot de passe : ");
+            MotDePasse mdp = new MotDePasse(Console.ReadLine());
+            Console.WriteLine(mdp._mot);
+
             Console.WriteLine("Au revoir !");
 
             Console.ReadKey();
