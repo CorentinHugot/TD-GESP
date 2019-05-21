@@ -1,32 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PubLinkLib
 {
     // Représente une collection de liens web
     public class Collection
     {
-        private List<Lien> listeliens;
+        private List<Lien> _listeLiens;
 
         public Collection()
         {
+            _listeLiens = new List<Lien>();
         }
 
+        ///<summary> Compte le nombre de liens dans la liste </summary>
         public int Compte
         {
-            get { return listeliens.Count; }
+            get { return _listeLiens.Count; }
         }
 
         public Lien Get(int indice)
         {
-            return listeliens.ElementAt(indice);
+            return _listeLiens.ElementAt(indice);
         }
 
-        public void Ajouter(Lien un_lien)
+        ///<summary>  Ajoute un lien dans la liste </summary>
+        public void Ajouter(Lien unLien)
         {
-            listeliens.Add(un_lien);
+            _listeLiens.Add(unLien);
+        }
+
+        public void Enlever(int indice)
+        {
+            _listeLiens.RemoveAt(indice);
         }
     }
 }

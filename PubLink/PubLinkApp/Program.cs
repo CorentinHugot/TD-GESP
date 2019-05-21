@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using PubLinkLib;
 
 namespace PubLinkApp
 {
@@ -9,27 +7,28 @@ namespace PubLinkApp
     {
         static void Main(string[] args)
         {
-            PubLinkLib.Collection listeLien = new PubLinkLib.Collection(); ;
-            listeLien.Ajouter(new PubLinkLib.Lien("Hacker News", "https://news.ycombinator.com"));
-            listeLien.Ajouter(new PubLinkLib.Lien("Reddit", "https://reddit.com"));
-            listeLien.Ajouter(new PubLinkLib.Lien("Boing Boing", "boingboing.net"));
+            Collection listeLiens = new Collection(); ;
+            listeLiens.Ajouter(new Lien("Hacker News", "https://news.ycombinator.com"));
+            listeLiens.Ajouter(new Lien("Reddit", "https://reddit.com"));
+            listeLiens.Ajouter(new Lien("Boing Boing", "boingboing.net"));
 
             string choix = "";
-            while (choix != "0")
+            while (choix != "3")
             {
-                string choix_possibles = "\n1 : Lister les liens";
-                choix_possibles += "\n0 : Quitter";
-                Console.WriteLine("Choisissez une action : " + choix_possibles);
+                string choixPossibles = "\n0 : Lister les liens";
+                choixPossibles += "\n1 : Ajouter un lien";
+                choixPossibles += "\n2 : Enlever un lien";
+                choixPossibles += "\n3 : Quitter";
+                Console.WriteLine("Choisissez une action : " + choixPossibles);
                 choix = Console.ReadLine();
-
                 switch (choix)
                 {
-                    case "1":
-                        if (listeLien.Compte > 0)
+                    case "0":
+                        if (listeLiens.Compte > 0)
                         {
-                            for (int i = 0; i < listeLien.Compte; i++)
+                            for (int i = 0; i < listeLiens.Compte; i++)
                             {
-                                Console.WriteLine((i+1) + " : " + listeLien.Get(i));
+                                Console.WriteLine((i+1) + " : " + listeLiens.Get(i));
                             }
                         }
                         else
@@ -37,6 +36,18 @@ namespace PubLinkApp
                             Console.WriteLine("Aucun lien à afficher !");
                         }
                         break;
+                    case "1":
+                        Console.WriteLine("Titre du lien : ");
+                        string titre = Console.ReadLine();
+                        Console.WriteLine("Url du lien : ");
+                        string url = Console.ReadLine();
+                        listeLiens.Ajouter(new Lien(titre, url));
+                        break;
+                    case "2":
+                        Console.WriteLine("Quel lien supprimer (numéro) ? ");
+                        listeLiens.Enlever(int.Parse(Console.ReadLine())-1);
+                        break;
+
                 }
                 Console.WriteLine();
             }
